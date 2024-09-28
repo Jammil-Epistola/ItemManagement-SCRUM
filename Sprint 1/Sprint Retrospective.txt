@@ -1,0 +1,33 @@
+Sprint Retrospective
+
+a. Sprint Restrospective Meeting in the Sprint Restrospective,
+we focused on open and honest communication about what went well,
+what didn't, and what we could improve.
+
+b. Team. Feedback 
+
+What went well: - FrontEnd of the website was made along with a Login
+and Main Page - implemented a Search Functionality as a stated in user
+Story 2.1
+
+What could be improved:
+- Lack of proper communication on most meetings. Mainly only few participated
+in the chat
+- No clear roles on  huge delays of what supposed to be a 2-week Sprint(finished in
+like 2 and a half week for sprint 1)
+- Test were done although no documentation
+
+Actions Needed to be Taken:
+- Give clear roles to each members and if no participation just ignore it and 
+continue as participation will be based on github commit history
+- Members should learn how to commit also create a branch and request pull to 
+prevent a messy repository
+
+Responsive Design Implemented: 
+- Team members collaborated well in implementing key features, such as the user 
+authentication system, despite the overall communication challenges.
+
+Regular Code Reviews:
+- The team conducted regular code reviews which helped to identify bugs early 
+on, leading to smoother integration of different components.
+
