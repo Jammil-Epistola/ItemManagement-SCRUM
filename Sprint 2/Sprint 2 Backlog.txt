@@ -1,0 +1,21 @@
+(Delicano)
+
+Sprint 2 Backlog:
+
+2.2 As a user, I want to add new items to the system so that I can manage my
+inventory. (CREATE)
+Acceptance Criteria:
+- In the Home Page, The System should have a "Add Item" Button
+- A Window or page pop-up with text fields to assign Item Descriptions
+- Allow users to assign Item Name, Price, Quantity, and Category
+
+2.3 As a user, I want to update the details of an existing item so that I can keep my
+inventory information up to date. (UPDATE)
+Acceptance Criteria:
+- In the Home Page of the Website there should be an Edit button beside the Add
+Item that is only works when selecting a Task
+- Implement an 'Edit' Button when selecting a Task
+- Design the task editing form (UI/UX).
+- Have text-fields
+- Ensure task updates are immediately reflected in the task list
+
