@@ -27,3 +27,8 @@ Acceptance Criteria:
 deletion.
 - Handle task removal in the backend and update the item list after a task is
 deleted.
+
+1.1 As a user client, I want to log in to the system so that I can manage items
+securely. (CONTINUATION)
+Acceptance Criteria:
+- The system should have a "Forgot Password" feature for account recovery.
