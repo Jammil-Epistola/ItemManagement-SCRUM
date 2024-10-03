@@ -1,4 +1,4 @@
-(Delicano)
+Commit by Delicano
 
 Sprint 2 Backlog:
 
@@ -19,3 +19,11 @@ Item that is only works when selecting a Task
 - Have text-fields
 - Ensure task updates are immediately reflected in the task list
 
+2.4 As a user, I want to delete items from the system so that I can remove
+obsolete or incorrect records. (DELETE)
+Acceptance Criteria:
+- When selecting items in the Home Page, there should be a delete button.
+- Implement the delete functionality and add a confirmation prompt before
+deletion.
+- Handle task removal in the backend and update the item list after a task is
+deleted.
