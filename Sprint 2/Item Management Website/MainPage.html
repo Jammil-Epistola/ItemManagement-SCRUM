@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Management System</title>
     <link rel="stylesheet" href="mainStyles.css">
-    <script src="mainScript.js"></script>
+    <script src="mainScript.js" defer></script> <!-- Make sure the script is deferred -->
 </head>
 <body>
 
@@ -24,7 +24,19 @@
                 <button id="searchButton">Search</button>
             </div>
             <!-- Add Item Button inside the container -->
-            <button class="add-item-button">Add Item</button>
+            <button class="add-item-button" onclick="showAddItemForm()">Add Item</button>
+        </div>
+
+        <!-- Add Item Form -->
+        <div class="add-item-form" style="display: none;">
+            <h3>Add New Item</h3>
+            <input type="text" id="newItemNumber" placeholder="Item Number" required>
+            <input type="text" id="newItemName" placeholder="Item Name" required>
+            <input type="text" id="newItemPrice" placeholder="Price" required>
+            <input type="number" id="newItemQuantity" placeholder="Quantity" required>
+            <input type="text" id="newItemCategory" placeholder="Category" required>
+            <button id="submitAddItem" onclick="addItem()">Add Item</button>
+            <button id="cancelAddItem" onclick="hideAddItemForm()">Cancel</button>
         </div>
 
         <!-- Table for items -->
@@ -48,8 +60,8 @@
                     <td>20</td>
                     <td>Electronics</td>
                     <td class="action-buttons">
-                        <button>Edit</button>
-                        <button class="delete">Delete</button>
+                        <button class="edit" onclick="editItem(this)">Edit</button>
+                        <button class="delete" onclick="deleteItem(this)">Delete</button>
                     </td>
                 </tr>
                 <!-- Test Item 2-->
@@ -60,8 +72,8 @@
                     <td>10</td>
                     <td>Clothing</td>
                     <td class="action-buttons">
-                        <button>Edit</button>
-                        <button class="delete">Delete</button>
+                        <button class="edit" onclick="editItem(this)">Edit</button>
+                        <button class="delete" onclick="deleteItem(this)">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -70,7 +82,3 @@
 
 </body>
 </html>
-
-
-
-
