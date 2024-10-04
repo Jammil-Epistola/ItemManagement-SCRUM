@@ -1,15 +1,15 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "enriquezzZ@558";
-$dbname = "item_management"; // Make sure this matches the name of the created database
+// Database connection details
+$dsn = 'mysql:host=localhost;dbname=item_management'; // Adjust if necessary
+$username = 'root';  // MySQL username (default for XAMPP)
+$password = 'enriquezzZ@558';      // MySQL password (default is empty for XAMPP)
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Create a new PDO connection
+try {
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    // Display detailed error message
+    die('Connection failed: ' . $e->getMessage());
 }
-echo "Connected successfully";
 ?>
