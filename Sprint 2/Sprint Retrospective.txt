@@ -1,0 +1,22 @@
+Commit by Delicano
+
+Sprint Retrospective Meeting (Sprint 2)
+
+In the Sprint Retrospective, we focused on open and honest communication about what
+went well, what didn’t, and what we could improve. I started the meeting by reminding
+everyone of its purpose: continuous improvement and team collaboration.
+
+b. Team Feedback
+	What went well:
+	 - The CRUD Item Management was created successfully
+	 - The had proper communications ensuring in quickly addressing and
+	   solving problems.
+	
+	What could be improved:
+	- The team felt that some user stories, particularly the Forgot Password, cannoty
+	be done due to requiring many validations and providing proof of identity. Whihc
+	cannot be done with current time-frame.
+
+	Actions Needed to be Taken:
+	- The Product Owner will refine user stories further ahead of Sprint
+	Planning to prevent complications.
