@@ -4,81 +4,237 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Management System</title>
-    <link rel="stylesheet" href="mainStyles.css">
-    <script src="mainScript.js" defer></script> <!-- Make sure the script is deferred -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8f0; /* Light background */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #4CAF50; /* Darker green for headings */
+        }
+
+        input[type="text"],
+        input[type="number"],
+        button {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px; /* Consistent width for inputs */
+        }
+
+        button {
+            background-color: #4CAF50; /* Green button */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        #item-table {
+            margin-top: 20px;
+            width: 80%;
+            border-collapse: collapse;
+        }
+
+        #item-table th, #item-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #item-table th {
+            background-color: #4CAF50; /* Table header color */
+            color: white;
+        }
+
+        #item-table tr:nth-child(even) {
+            background-color: #f2f2f2; /* Zebra striping for rows */
+        }
+
+        #item-table tr:hover {
+            background-color: #ddd; /* Highlight row on hover */
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <div class="logo">Item Management System</div>
-    </div>
+    <h1>Item Management System</h1>
 
-    <!-- Container for table -->
-    <div class="container">
+    <!-- Search bar to search for item names -->
+    <input type="text" id="search-bar" placeholder="Search by item name">
 
-        <!-- Search Bar and Button -->
-        <div class="search-bar-container">
-            <div class="search-bar">
-                <input type="text" id="searchBar" placeholder="Search by name or category" onkeyup="searchItems()">
-                <button id="searchButton">Search</button>
-            </div>
-            <!-- Add Item Button inside the container -->
-            <button class="add-item-button" onclick="showAddItemForm()">Add Item</button>
-        </div>
+    <!-- Form to create a new item -->
+    <form id="create-item-form">
+        <input type="text" name="item_number" id="item-number" placeholder="Item Number" required>
+        <input type="text" name="name" id="item-name" placeholder="Item Name" required>
+        <input type="number" name="quantity" id="item-quantity" placeholder="Quantity" required>
+        <input type="number" name="price" id="item-price" placeholder="Price" required>
+        <input type="text" name="category" id="item-category" placeholder="Category" required>
+        <button type="submit">Add Item</button>
+    </form>
 
-        <!-- Add Item Form -->
-        <div class="add-item-form" style="display: none;">
-            <h3>Add New Item</h3>
-            <input type="text" id="newItemNumber" placeholder="Item Number" required>
-            <input type="text" id="newItemName" placeholder="Item Name" required>
-            <input type="text" id="newItemPrice" placeholder="Price" required>
-            <input type="number" id="newItemQuantity" placeholder="Quantity" required>
-            <input type="text" id="newItemCategory" placeholder="Category" required>
-            <button id="submitAddItem" onclick="addItem()">Add Item</button>
-            <button id="cancelAddItem" onclick="hideAddItemForm()">Cancel</button>
-        </div>
+    <!-- Table to display items -->
+    <table id="item-table">
+        <thead>
+            <tr>
+                <th>Item Number</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="item-list">
+            <!-- Item rows will be appended here dynamically using jQuery -->
+        </tbody>
+    </table>
 
-        <!-- Table for items -->
-        <table id="itemTable">
-            <thead>
-                <tr>
-                    <th>Item Number</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Test Item 1-->
-                <tr>
-                    <td>0001</td>
-                    <td>Item 1</td>
-                    <td>P 10.00</td>
-                    <td>20</td>
-                    <td>Electronics</td>
-                    <td class="action-buttons">
-                        <button class="edit" onclick="editItem(this)">Edit</button>
-                        <button class="delete" onclick="deleteItem(this)">Delete</button>
-                    </td>
-                </tr>
-                <!-- Test Item 2-->
-                <tr>
-                    <td>0002</td>
-                    <td>Item 2</td>
-                    <td>P 15.00</td>
-                    <td>10</td>
-                    <td>Clothing</td>
-                    <td class="action-buttons">
-                        <button class="edit" onclick="editItem(this)">Edit</button>
-                        <button class="delete" onclick="deleteItem(this)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <!-- jQuery for handling create, edit, delete, and search actions -->
+    <script>
+        $(document).ready(function() {
+            // Function to load items, with an optional search query
+            function loadItems(search = '') {
+                $.ajax({
+                    url: 'read_items.php',
+                    type: 'GET',
+                    data: { search: search }, // Pass search query if provided
+                    success: function(response) {
+                        $('#item-list').html(response); // Display the items
+                    }
+                });
+            }
 
+            // Load all items when the page loads
+            loadItems();
+
+            // Search items dynamically as the user types in the search bar
+            $('#search-bar').on('input', function() {
+                let searchQuery = $(this).val();
+                loadItems(searchQuery); // Reload items based on the search query
+            });
+
+            // Create new item using AJAX
+            $('#create-item-form').on('submit', function(e) {
+                e.preventDefault(); // Prevent form submission
+
+                var itemNumber = $('#item-number').val();
+                var itemName = $('#item-name').val();         
+                var itemQuantity = $('#item-quantity').val();
+                var itemPrice = $('#item-price').val();
+                var itemCategory = $('#item-category').val();
+
+                $.ajax({
+                    url: 'create_item.php',
+                    type: 'POST',
+                    data: {
+                        item_number: itemNumber,
+                        name: itemName,
+                        quantity: itemQuantity,
+                        price: itemPrice,
+                        category: itemCategory
+                    },
+                    success: function(response) {
+                        alert(response); // Show success message
+                        loadItems(); // Reload items dynamically
+                        $('#create-item-form')[0].reset(); // Clear form
+                    }
+                });
+            });
+
+            // Delete item using AJAX
+            $(document).on('click', '.delete-btn', function() {
+                var itemId = $(this).data('id');
+                $.ajax({
+                    url: 'delete_item.php',
+                    type: 'POST',
+                    data: { id: itemId },
+                    success: function(response) {
+                        alert(response); // Show success message
+                        loadItems(); // Reload items dynamically
+                    }
+                });
+            });
+
+            // Edit item (trigger the edit process)
+            $(document).on('click', '.edit-btn', function() {
+                var itemId = $(this).data('id');
+                var itemNumber = $(this).data('item-number');
+                var itemName = $(this).data('name');
+                var itemQuantity = $(this).data('quantity');
+                var itemPrice = $(this).data('price');
+                var itemCategory = $(this).data('category');
+
+                // Fill the form with the current item data for editing
+                $('#item-number').val(itemNumber);
+                $('#item-name').val(itemName);
+                $('#item-quantity').val(itemQuantity);
+                $('#item-price').val(itemPrice);
+                $('#item-category').val(itemCategory);
+
+                // Change the form action to update
+                $('#create-item-form').off('submit').on('submit', function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: 'update_item.php',
+                        type: 'POST',
+                        data: {
+                            id: itemId,
+                            item_number: $('#item-number').val(),
+                            name: $('#item-name').val(),    
+                            quantity: $('#item-quantity').val(),
+                            price: $('#item-price').val(),
+                            category: $('#item-category').val()
+                        },
+                        success: function(response) {
+                            alert(response);
+                            loadItems(); // Reload items
+                            $('#create-item-form')[0].reset(); // Reset the form
+                            $('#create-item-form').off('submit').on('submit', function(e) {
+                                e.preventDefault();
+                                // Return form back to add new item
+                                var itemNumber = $('#item-number').val();
+                                var itemName = $('#item-name').val();
+                                
+                                
+                                var itemQuantity = $('#item-quantity').val();
+                                var itemPrice = $('#item-price').val();
+                                var itemCategory = $('#item-category').val();
+                                $.ajax({
+                                    url: 'create_item.php',
+                                    type: 'POST',
+                                    data: {
+                                        item_number: itemNumber,
+                                        name: itemName,                                       
+                                        quantity: itemQuantity,
+                                        price: itemPrice,
+                                        category: itemCategory
+                                    },
+                                    success: function(response) {
+                                        alert(response);
+                                        loadItems(); // Reload items dynamically
+                                        $('#create-item-form')[0].reset(); // Clear form
+                                    }
+                                });
+                            });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
