@@ -2,7 +2,7 @@
 $servername = "localhost";
 $dbname = "item_management";
 $username = "root";   // Default MySQL username for XAMPP
-$password = "enriquezzZ@558"; // Leave blank for XAMPP's default MySQL setup
+$password = ""; // Leave blank for XAMPP's default MySQL setup
 // Create the connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
