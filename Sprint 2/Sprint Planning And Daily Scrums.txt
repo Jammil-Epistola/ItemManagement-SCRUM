@@ -3,4 +3,18 @@ Sprint Planning:
 September 28 ,2024: Planned Sprint Backlog for Sprint 2 
 October 3, 2024: Sprint Backlog was Uploaded into GitHub
 
-Daily Scrum 1:
+Daily Scrum 1: October 4, 2024
+Backend Development
+Yesterday: Created Database connection
+Today: 
+	- Implement Backend Table for the Item Management 
+	- Update Database
+	-Implement Add,Edit,Delete Functionality
+Tomorrow:
+	- Will do testing and bug fixes
+
+Frontend Development:
+	- Planning a complete new design for the MainPage
+	- Planning a new design for the LoginPage as well
+
+October 6 ,2024: Backend (CRUD) Functionality Completed (Create,Read,Update,Delete)
