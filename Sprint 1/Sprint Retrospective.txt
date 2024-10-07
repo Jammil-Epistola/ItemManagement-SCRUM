@@ -7,8 +7,8 @@ we focused on open and honest communication about what went well,
 what didn't, and what we could improve.
 
 b. Team. Feedback 
-
-What went well: - FrontEnd of the website was made along with a Login
+ 
+What went well: -FrontEnd of the website was made along with a Login
 and Main Page - implemented a Search Functionality as a stated in user
 Story 2.1
 
